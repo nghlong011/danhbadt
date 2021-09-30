@@ -32,8 +32,8 @@
         </form>
 
         <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2"><a href="../admin/login.php">Đăng Nhập</a></button>
-          <button type="button" class="btn btn-warning">Đăng ký</button>
+          <button type="button" class="btn btn-outline-light me-2"><a href="../../danhbadt/admin/login.php">Đăng Nhập</a></button>
+          <button type="button" class="btn btn-warning"><a href="../../danhbadt/admin/register.php">Đăng ký</a></button>
         </div>
       </div>
     </div>
