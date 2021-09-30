@@ -41,7 +41,7 @@
                 }
 
                 $conn->close();
-                header("Location: /project");
+                header("Location: /danhbadt");
             }
             ?>
 
