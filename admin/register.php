@@ -22,8 +22,17 @@
               <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
-
-                <form class="mx-1 mx-md-4">
+                <?php 
+                  if(isset($_GET['response'])){
+                    if($_GET['response'] == 'successfully'){
+                      echo "<p class='text-danger'>Bạn đã đăng ký thành công</p>";
+                    }
+                    if($_GET['response'] == 'existed'){
+                      echo "<p class='text-danger'>email đã tồn tại</p>";
+                    }
+                  }
+                ?>
+                <form class="mx-1 mx-md-4" action="./process-register.php" method="POST">
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
