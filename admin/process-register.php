@@ -13,7 +13,8 @@ $last_Name = $_POST['lastName'];
 $email = $_POST['email'];
 $pass1 = $_POST['pass1'];
 $pass2 = $_POST['pass2'];
-
+$str=rand();
+$code = md5($str);
 $sql_1 = "select * from users where email = '$email'";
 $result_1 = mysqli_query($conn, $sql_1);
 
@@ -22,7 +23,7 @@ if (mysqli_num_rows($result_1) > 0) {
     header("Location: register.php?response=$value");
 } else {
     $pass_hash = password_hash($pass1, PASSWORD_DEFAULT);
-    $sql_2 = "insert into users(first_name, last_name, email, password) values ('$first_Name','$last_Name','$email','$pass_hash')";
+    $sql_2 = "insert into users(first_name, last_name, email, password,activation) values ('$first_Name','$last_Name','$email','$pass_hash','$code')";
     $result_2 = mysqli_query($conn, $sql_2);
     $mail = new PHPMailer(true);
 
@@ -44,22 +45,17 @@ if (mysqli_num_rows($result_1) > 0) {
 
         $mail->addAddress($email); // Add a recipient
 
-        // Attachments
-        // $mail->addAttachment('pdf/XTT/'.$data[11].'.pdf', $data[11].'_1.pdf'); // Add attachments
-        //$mail->addAttachment('pdf/Giay_bao_mat_sau.pdf'); // Optional name
-
         // Content
         $mail->isHTML(true);   // Set email format to HTML
         $tieude = '[Đăng kí tài khoản ] kích hoạt tài khoản';
         $mail->Subject = $tieude;
 
-        $str=rand();
-        $code = md5($str);
+        
         // Mail body content 
         $bodyContent = '<p>Chào mừng bạn đến với dbdt</h1>';
         $bodyContent .= '<p>Bạn vui lòng nhấp vào đường link dưới đây để kích hoạt tài khoản</p>';
-        $bodyContent .= '<p><a href="http://localhost/danhbadt/admin/activation.php?account='.$email.'&code='.$code.'">Click here</a></p>';
-
+        $bodyContent .= '<p><a href="http://localhost/danhbadt/admin/activation.php?email='.$email.'&code='.$code.'">Click here</a></p>';
+        
         $mail->Body = $bodyContent;
         // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
         if ($mail->send()) {
